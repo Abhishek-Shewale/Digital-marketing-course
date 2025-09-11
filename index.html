@@ -8,6 +8,9 @@
   <!-- tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- jsPDF library for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <!-- font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -88,7 +91,7 @@
       <div>
         <span class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700">
           <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-          100% Free Micro-Courses
+          100% Free Courses
         </span>
 
         <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
@@ -153,7 +156,7 @@
 
           <div class="mt-6 flex flex-wrap gap-3">
             <a id="startBtn" href="#" class="rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800">Start Free Course</a>
-            <button id="downloadBtn" class="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold hover:bg-white">Download Syllabus</button>
+            <button id="downloadBtn" class="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold hover:bg-white">Download Syllabus (PDF)</button>
           </div>
         </div>
       </div>
@@ -165,7 +168,10 @@
     <div class="mx-auto max-w-4xl px-4 py-12 md:py-16">
       <div class="mb-6 flex items-center justify-between">
         <button id="backToCourseBtn" class="rounded-xl border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50">← Back to course info</button>
-        <div class="text-sm text-slate-600" id="lessonMeta"></div>
+        <div class="flex items-center gap-3">
+          <button id="downloadFullCourseBtn" class="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Download Course (PDF)</button>
+          <div class="text-sm text-slate-600" id="lessonMeta"></div>
+        </div>
       </div>
 
       <h2 id="lessonTitle" class="text-2xl font-bold"></h2>
