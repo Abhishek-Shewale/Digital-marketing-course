@@ -128,12 +128,9 @@
 
   <!-- COURSE INFO (shows lesson titles only) -->
   <section id="courseView" class="border-t border-slate-200 bg-slate-50/60 hidden">
-    <div class="mx-auto max-w-6xl px-4 py-12 md:py-16">
-      <div class="mb-6 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <button id="backBtn" class="rounded-xl border border-slate-300 px-3 py-2 text-sm hover:bg-white">← Back to all courses</button>
-          <span id="badge" class="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">Digital Marketing</span>
-        </div>
+    <div class="mx-auto max-w-6xl px-4 py-8 md:py-16">
+      <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <button id="backBtn" class="rounded-xl border border-slate-300 px-4 py-3 text-sm hover:bg-white w-fit">← Back to all courses</button>
         <div class="text-sm text-slate-600" id="meta"></div>
       </div>
 
@@ -142,7 +139,7 @@
           <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white">
             <img id="cover" alt="Course cover" class="h-64 w-full object-cover md:h-80"/>
           </div>
-          <div class="mt-6 flex flex-wrap gap-2" id="tagList"></div>
+          <div class="mt-6 flex flex-wrap gap-3" id="tagList"></div>
         </div>
 
         <div>
@@ -154,9 +151,9 @@
             <ul id="lessonList" class="list-disc pl-5 text-slate-700 space-y-1"></ul>
           </div>
 
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a id="startBtn" href="#" class="rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800">Start Free Course</a>
-            <button id="downloadBtn" class="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold hover:bg-white">Download Syllabus (PDF)</button>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:gap-3">
+            <a id="startBtn" href="#" class="rounded-xl bg-slate-900 px-6 py-4 text-sm font-semibold text-white hover:bg-slate-800 text-center">Start Free Course</a>
+            <button id="downloadBtn" class="rounded-xl border border-slate-300 px-6 py-4 text-sm font-semibold hover:bg-white text-center">Download Syllabus (PDF)</button>
           </div>
         </div>
       </div>
@@ -165,11 +162,11 @@
 
   <!-- LESSONS (all lessons rendered on one page) -->
   <section id="lessonView" class="border-t border-slate-200 bg-white hidden">
-    <div class="mx-auto max-w-4xl px-4 py-12 md:py-16">
-      <div class="mb-6 flex items-center justify-between">
-        <button id="backToCourseBtn" class="rounded-xl border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50">← Back to course info</button>
-        <div class="flex items-center gap-3">
-          <button id="downloadFullCourseBtn" class="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Download Course (PDF)</button>
+    <div class="mx-auto max-w-4xl px-4 py-8 md:py-16">
+      <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <button id="backToCourseBtn" class="rounded-xl border border-slate-300 px-4 py-3 text-sm hover:bg-slate-50 w-fit">← Back to course info</button>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <button id="downloadFullCourseBtn" class="rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 w-fit">Download Course (PDF)</button>
           <div class="text-sm text-slate-600" id="lessonMeta"></div>
         </div>
       </div>
