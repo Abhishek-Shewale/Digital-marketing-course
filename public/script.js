@@ -1019,7 +1019,7 @@ const topics = [
   // Function to load and convert SVG to image data
   async function loadLogoAsImageData() {
     try {
-      const response = await fetch('public/studnetailogo.svg');
+      const response = await fetch('studnetailogo.svg');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
