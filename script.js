@@ -1020,6 +1020,9 @@ const topics = [
   async function loadLogoAsImageData() {
     try {
       const response = await fetch('public/studnetailogo.svg');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const svgText = await response.text();
       
       // Create a canvas to convert SVG to image data
@@ -1027,13 +1030,18 @@ const topics = [
       const ctx = canvas.getContext('2d');
       const img = new Image();
       
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         img.onload = function() {
           canvas.width = 100; // Set logo width
           canvas.height = 100; // Set logo height
           ctx.drawImage(img, 0, 0, 100, 100);
           const imageData = canvas.toDataURL('image/png');
           resolve(imageData);
+        };
+        
+        img.onerror = function() {
+          console.error('Error loading image from SVG');
+          resolve(null); // Return null instead of rejecting to allow PDF generation without logo
         };
         
         // Convert SVG to data URL
@@ -1049,6 +1057,10 @@ const topics = [
 
   // Function to generate PDF with logo
   async function generatePDFWithLogo(course, isFullCourse = false) {
+    if (!window.jspdf) {
+      throw new Error('jsPDF library not loaded. Please check if the CDN is accessible.');
+    }
+    
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     
@@ -1141,30 +1153,40 @@ const topics = [
 
   /* ------------- download syllabus (PDF) ------------- */
   async function downloadSyllabus() {
-    if (!currentCourse) return;
+    if (!currentCourse) {
+      console.error('No current course selected');
+      return;
+    }
     
     try {
+      console.log('Starting PDF generation for syllabus...');
       const doc = await generatePDFWithLogo(currentCourse, false);
       const fileName = `${(currentCourse.title || 'syllabus').replace(/[^a-z0-9]+/gi,'-').toLowerCase()}-syllabus.pdf`;
+      console.log('Saving PDF:', fileName);
       doc.save(fileName);
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Error generating PDF. Please try again.');
+      alert('Error generating PDF. Please check console for details.');
     }
   }
 
   /* ------------- download course (PDF) ------------- */
   async function downloadCourse(courseId) {
     const course = topics.find(t => t.id === courseId);
-    if (!course) return;
+    if (!course) {
+      console.error('Course not found:', courseId);
+      return;
+    }
     
     try {
+      console.log('Starting PDF generation for course:', course.title);
       const doc = await generatePDFWithLogo(course, true);
       const fileName = `${(course.title || 'course').replace(/[^a-z0-9]+/gi,'-').toLowerCase()}-course.pdf`;
+      console.log('Saving PDF:', fileName);
       doc.save(fileName);
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Error generating PDF. Please try again.');
+      alert('Error generating PDF. Please check console for details.');
     }
   }
   
@@ -1192,11 +1214,17 @@ const topics = [
     renderFullCourse(0);
   });
   
-  downloadBtn?.addEventListener('click', downloadSyllabus);
+  downloadBtn?.addEventListener('click', () => {
+    console.log('Download syllabus button clicked');
+    downloadSyllabus();
+  });
   
   downloadFullCourseBtn?.addEventListener('click', () => {
+    console.log('Download full course button clicked');
     if (currentCourse) {
       downloadCourse(currentCourse.id);
+    } else {
+      console.error('No current course available for download');
     }
   });
   
