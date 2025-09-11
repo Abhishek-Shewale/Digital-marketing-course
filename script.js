@@ -970,43 +970,40 @@ const topics = [
   /* ------------- render full course (all lessons on one page) ------------- */
   function renderFullCourse(startIndex = null) {
     if (!currentCourse) return;
-  
+
     // shallow copy lessons so we don't mutate original
     const lessons = (currentCourse.lessons || []).map(l => Object.assign({}, l));
-  
-    // build lesson blocks
+
+    // Course cover image at the top
+    const courseCoverImage = currentCourse.cover || defaultCover;
+    const courseImageHtml = `
+      <div class="mb-8 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+        <img src="${escapeHtml(courseCoverImage)}" alt="${escapeHtml(currentCourse.title || '')}" class="w-full h-64 md:h-80 lg:h-96 object-cover" loading="lazy" onerror="this.onerror=null;this.src='${escapeHtml(defaultCover)}';" />
+      </div>
+    `;
+
+    // build lesson blocks without individual images
     const blocks = lessons.map((lesson, idx) => {
       const num = idx + 1;
       const safeTitle = escapeHtml(lesson.title || `Lesson ${num}`);
-  
-      let imgHtml = '';
-      if (lesson.image) {
-        imgHtml = `
-          <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white">
-            <img src="${escapeHtml(lesson.image)}" alt="${safeTitle}" class="w-full h-64 md:h-80 lg:h-96 object-cover" loading="lazy" onerror="this.onerror=null;this.src='${escapeHtml(defaultCover)}';" />
-          </div>
-        `;
-      }
-  
       const contentSource = lesson.content || '';
       const contentHtml = toHtmlParagraphs(contentSource);
-  
+
       return `
         <article class="mb-12" id="lesson-${num}">
           <h3 class="text-2xl font-bold">${num}. ${safeTitle}</h3>
-          ${imgHtml}
           <div class="mt-4">${contentHtml}</div>
         </article>
       `;
     });
-  
+
     lessonTitle.textContent = `${escapeHtml(currentCourse.title || '')} — All lessons`;
     lessonMeta.textContent = `${escapeHtml(currentCourse.title || '')} • ${escapeHtml(currentCourse.level || '')}`;
-    lessonContent.innerHTML = `<div class="prose max-w-none">${blocks.join('\n')}</div>`;
-  
+    lessonContent.innerHTML = `<div class="prose max-w-none">${courseImageHtml}${blocks.join('\n')}</div>`;
+
     courseInfoSection?.classList.add('hidden');
     lessonSection?.classList.remove('hidden');
-  
+
     // scroll and optionally jump to a lesson
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (Number.isFinite(startIndex) && startIndex >= 0) {
