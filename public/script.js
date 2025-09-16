@@ -858,6 +858,9 @@ const topics = [
   const heroSection = document.getElementById('hero');
   const coursesSection = document.getElementById('courses');
   const courseInfoSection = document.getElementById('courseView');
+  const courseDashboardSection = document.getElementById('courseDashboard');
+  const lessonCardsSection = document.getElementById('lessonCardsView');
+  const individualLessonSection = document.getElementById('individualLessonView');
   const lessonSection = document.getElementById('lessonView');
   
   const title = document.getElementById('title');
@@ -870,6 +873,27 @@ const topics = [
   const meta = document.getElementById('meta');
   const backBtn = document.getElementById('backBtn');
   
+  // Dashboard elements
+  const dashboardTitle = document.getElementById('dashboardTitle');
+  const dashboardMeta = document.getElementById('dashboardMeta');
+  const studyMaterialsCard = document.getElementById('studyMaterialsCard');
+  const importantTopicsCard = document.getElementById('importantTopicsCard');
+  const mockTestsCard = document.getElementById('mockTestsCard');
+  const backToCourseFromDashboardBtn = document.getElementById('backToCourseFromDashboardBtn');
+
+  // Lesson cards elements
+  const lessonCardsTitle = document.getElementById('lessonCardsTitle');
+  const lessonCardsMeta = document.getElementById('lessonCardsMeta');
+  const lessonCardsGrid = document.getElementById('lessonCardsGrid');
+  const backToDashboardBtn = document.getElementById('backToDashboardBtn');
+
+  // Individual lesson elements
+  const individualLessonTitle = document.getElementById('individualLessonTitle');
+  const individualLessonImage = document.getElementById('individualLessonImage');
+  const individualLessonContent = document.getElementById('individualLessonContent');
+  const backToLessonCardsBtn = document.getElementById('backToLessonCardsBtn');
+  const downloadLessonBtn = document.getElementById('downloadLessonBtn');
+  
   const lessonTitle = document.getElementById('lessonTitle');
   const lessonContent = document.getElementById('lessonContent');
   const lessonMeta = document.getElementById('lessonMeta');
@@ -877,6 +901,7 @@ const topics = [
   const downloadFullCourseBtn = document.getElementById('downloadFullCourseBtn');
   
   let currentCourse = null;
+  let currentLesson = null;
   
   /* ------------- render cards ------------- */
   function renderCards(filter = '') {
@@ -956,14 +981,100 @@ const topics = [
     });
   
     tagList.innerHTML = (currentCourse.tags || []).map(tag => `<span class='rounded-full bg-white border border-slate-200 px-2.5 py-1 text-xs font-medium mr-1'>${escapeHtml(tag)}</span>`).join('');
-    meta.textContent = `${currentCourse.level || ''} • ${currentCourse.duration || ''}`;
+    meta.textContent = '';
   
     // show/hide sections
     heroSection?.classList.add('hidden');
     coursesSection?.classList.add('hidden');
     lessonSection?.classList.add('hidden');
+    lessonCardsSection?.classList.add('hidden');
+    individualLessonSection?.classList.add('hidden');
+    courseDashboardSection?.classList.add('hidden');
     courseInfoSection?.classList.remove('hidden');
   
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ------------- show course dashboard ------------- */
+  function showCourseDashboard() {
+    if (!currentCourse) return;
+
+    dashboardTitle.textContent = `Crack ${currentCourse.title} with Student AI`;
+
+    // show/hide sections
+    heroSection?.classList.add('hidden');
+    coursesSection?.classList.add('hidden');
+    lessonSection?.classList.add('hidden');
+    lessonCardsSection?.classList.add('hidden');
+    individualLessonSection?.classList.add('hidden');
+    courseInfoSection?.classList.add('hidden');
+    courseDashboardSection?.classList.remove('hidden');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ------------- show lesson cards ------------- */
+  function showLessonCards() {
+    if (!currentCourse) return;
+
+    lessonCardsTitle.textContent = `${currentCourse.title} - Study Materials`;
+    lessonCardsGrid.innerHTML = '';
+
+    // Create lesson cards
+    (currentCourse.lessons || []).forEach((lesson, index) => {
+      const card = document.createElement('div');
+      card.className = 'group relative rounded-2xl border border-slate-200 bg-white p-6 hover:shadow-lg transition-all duration-200 cursor-pointer';
+      card.setAttribute('data-lesson-index', index);
+
+      // Extract first sentence as description
+      const description = lesson.content ? lesson.content.split('.')[0] + '.' : 'Learn essential concepts and practical applications.';
+      
+      card.innerHTML = `
+        <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-100 mb-4">
+          <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-2">${escapeHtml(lesson.title || `Lesson ${index + 1}`)}</h3>
+        <p class="text-slate-600 text-sm">${escapeHtml(description)}</p>
+      `;
+
+      card.addEventListener('click', () => showIndividualLesson(index));
+      lessonCardsGrid.appendChild(card);
+    });
+
+    // show/hide sections
+    heroSection?.classList.add('hidden');
+    coursesSection?.classList.add('hidden');
+    lessonSection?.classList.add('hidden');
+    individualLessonSection?.classList.add('hidden');
+    courseInfoSection?.classList.add('hidden');
+    courseDashboardSection?.classList.add('hidden');
+    lessonCardsSection?.classList.remove('hidden');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ------------- show individual lesson ------------- */
+  function showIndividualLesson(lessonIndex) {
+    if (!currentCourse || !currentCourse.lessons || !currentCourse.lessons[lessonIndex]) return;
+
+    currentLesson = currentCourse.lessons[lessonIndex];
+    
+    individualLessonTitle.textContent = currentLesson.title || `Lesson ${lessonIndex + 1}`;
+    individualLessonImage.src = currentLesson.image || defaultCover;
+    individualLessonImage.alt = currentLesson.title || `Lesson ${lessonIndex + 1}`;
+    individualLessonContent.innerHTML = `<div class="prose max-w-none">${toHtmlParagraphs(currentLesson.content || '')}</div>`;
+
+    // show/hide sections
+    heroSection?.classList.add('hidden');
+    coursesSection?.classList.add('hidden');
+    lessonSection?.classList.add('hidden');
+    courseInfoSection?.classList.add('hidden');
+    courseDashboardSection?.classList.add('hidden');
+    lessonCardsSection?.classList.add('hidden');
+    individualLessonSection?.classList.remove('hidden');
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   
@@ -998,10 +1109,14 @@ const topics = [
     });
 
     lessonTitle.textContent = `${escapeHtml(currentCourse.title || '')} — All lessons`;
-    lessonMeta.textContent = `${escapeHtml(currentCourse.title || '')} • ${escapeHtml(currentCourse.level || '')}`;
+    lessonMeta.textContent = '';
     lessonContent.innerHTML = `<div class="prose max-w-none">${courseImageHtml}${blocks.join('\n')}</div>`;
 
+    // show/hide sections
     courseInfoSection?.classList.add('hidden');
+    courseDashboardSection?.classList.add('hidden');
+    lessonCardsSection?.classList.add('hidden');
+    individualLessonSection?.classList.add('hidden');
     lessonSection?.classList.remove('hidden');
 
     // scroll and optionally jump to a lesson
@@ -1196,12 +1311,39 @@ const topics = [
   
   backToCourseBtn?.addEventListener('click', () => {
     lessonSection?.classList.add('hidden');
+    courseDashboardSection?.classList.add('hidden');
+    lessonCardsSection?.classList.add('hidden');
+    individualLessonSection?.classList.add('hidden');
     courseInfoSection?.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  backToCourseFromDashboardBtn?.addEventListener('click', () => {
+    courseDashboardSection?.classList.add('hidden');
+    lessonCardsSection?.classList.add('hidden');
+    individualLessonSection?.classList.add('hidden');
+    courseInfoSection?.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  backToDashboardBtn?.addEventListener('click', () => {
+    lessonCardsSection?.classList.add('hidden');
+    individualLessonSection?.classList.add('hidden');
+    courseDashboardSection?.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  backToLessonCardsBtn?.addEventListener('click', () => {
+    individualLessonSection?.classList.add('hidden');
+    lessonCardsSection?.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
   
   backBtn?.addEventListener('click', () => {
     courseInfoSection?.classList.add('hidden');
+    courseDashboardSection?.classList.add('hidden');
+    lessonCardsSection?.classList.add('hidden');
+    individualLessonSection?.classList.add('hidden');
     lessonSection?.classList.add('hidden');
     heroSection?.classList.remove('hidden');
     coursesSection?.classList.remove('hidden');
@@ -1210,8 +1352,22 @@ const topics = [
   
   startBtn?.addEventListener('click', function (e) {
     e.preventDefault();
-    // render full course from the start
-    renderFullCourse(0);
+    // show dashboard instead of immediately starting course
+    showCourseDashboard();
+  });
+
+  // Dashboard card event handlers
+  studyMaterialsCard?.addEventListener('click', () => {
+    // Show lesson cards when Study Materials is clicked
+    showLessonCards();
+  });
+
+  importantTopicsCard?.addEventListener('click', () => {
+    alert('Important Topics feature is coming soon! Stay tuned for updates.');
+  });
+
+  mockTestsCard?.addEventListener('click', () => {
+    alert('Mock Tests & Analytics feature is coming soon! Stay tuned for updates.');
   });
   
   downloadBtn?.addEventListener('click', () => {
