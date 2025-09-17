@@ -187,12 +187,17 @@ const individualLessonImage = document.getElementById('individualLessonImage');
 const individualLessonContent = document.getElementById('individualLessonContent');
 const backToLessonCardsBtn = document.getElementById('backToLessonCardsBtn');
 const downloadLessonBtn = document.getElementById('downloadLessonBtn');
+const individualLessonTags = document.getElementById('individualLessonTags');
 
 const lessonTitle = document.getElementById('lessonTitle');
 const lessonContent = document.getElementById('lessonContent');
 const lessonMeta = document.getElementById('lessonMeta');
 const backToCourseBtn = document.getElementById('backToCourseBtn');
 const downloadFullCourseBtn = document.getElementById('downloadFullCourseBtn');
+const lessonTags = document.getElementById('lessonTags');
+
+// Important topics tags container
+const importantTopicsTags = document.getElementById('importantTopicsTags');
 
 let currentCourse = null;
 
@@ -316,6 +321,9 @@ function showLessonCards() {
 
   lessonCardsTitle.textContent = `${currentCourse.title} - Study Materials`;
   lessonCardsGrid.innerHTML = '';
+  if (lessonCardsMeta) {
+    lessonCardsMeta.innerHTML = (currentCourse.tags || []).map(tag => `<span class='rounded-full bg-white border border-slate-200 px-2.5 py-1 text-xs font-medium'>${escapeHtml(tag)}</span>`).join('');
+  }
 
   // Create lesson cards
   (currentCourse.lessons || []).forEach((lesson, index) => {
@@ -366,6 +374,9 @@ function showImportantTopics() {
 
   importantTopicsTitle.textContent = topicsData.title;
   importantTopicsNoteText.textContent = topicsData.note;
+  if (importantTopicsTags) {
+    importantTopicsTags.innerHTML = (currentCourse.tags || []).map(tag => `<span class='rounded-full bg-white border border-slate-200 px-2.5 py-1 text-xs font-medium'>${escapeHtml(tag)}</span>`).join('');
+  }
 
   // Generate important topics content
   importantTopicsContent.innerHTML = '';
@@ -809,8 +820,10 @@ function generateCertificateContent(name, score) {
   certificateContent.innerHTML = `
     <div class="border-4 border-slate-800 p-8 bg-gradient-to-br from-blue-50 to-indigo-100">
       <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-slate-800 mb-2">Student AI</h1>
-        <p class="text-lg text-slate-600">Digital Marketing Education Platform</p>
+        <div class="mx-auto mb-4 w-28 h-28 flex items-center justify-center">
+          <img src="studnetailogo.svg" alt="Logo" class="w-28 h-28 object-contain"/>
+        </div>
+        <h1 class="text-4xl font-bold text-slate-800">Student AI</h1>
       </div>
       
       <div class="text-center mb-8">
@@ -821,14 +834,14 @@ function generateCertificateContent(name, score) {
         <h4 class="text-xl font-semibold text-slate-800 mb-6">Digital Marketing Certification Exam</h4>
       </div>
       
-      <div class="grid grid-cols-2 gap-8 mb-8">
-        <div class="text-center">
+      <div class="flex justify-center items-center gap-16 mb-8 text-center">
+        <div>
           <p class="text-sm text-slate-600 mb-1">Score Achieved</p>
-          <p class="text-2xl font-bold text-slate-800">${score.marks}/100</p>
+          <p class="text-3xl font-extrabold text-slate-800">${score.marks}/100</p>
         </div>
-        <div class="text-center">
+        <div>
           <p class="text-sm text-slate-600 mb-1">Percentage</p>
-          <p class="text-2xl font-bold text-slate-800">${score.percentage}%</p>
+          <p class="text-3xl font-extrabold text-slate-800">${score.percentage}%</p>
         </div>
       </div>
       
@@ -848,13 +861,14 @@ function generateCertificateContent(name, score) {
       
       <div class="text-center">
         <p class="text-xs text-slate-500">Certificate ID: DM-${Date.now().toString().slice(-8)}</p>
+        <p class="text-[11px] text-slate-500 mt-1">Powered by <strong>DeployH.ai</strong></p>
       </div>
     </div>
   `;
 }
 
 /* ------------- download certificate as PDF ------------- */
-function downloadCertificate() {
+async function downloadCertificate() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('landscape', 'mm', 'a4');
 
@@ -868,47 +882,59 @@ function downloadCertificate() {
     day: 'numeric'
   });
 
-  // Set up the PDF
-  doc.setFontSize(24);
-  doc.setFont('helvetica', 'bold');
-  doc.text('Student AI', 105, 30, { align: 'center' });
+  // Background similar to on-screen card (slimmer margins)
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  doc.setFillColor(233, 240, 252); // light blue tint
+  doc.rect(6, 6, pageW - 12, pageH - 12, 'F');
 
-  doc.setFontSize(12);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Digital Marketing Education Platform', 105, 40, { align: 'center' });
+  // Add logo if available (await)
+  try {
+    const logoData = await loadLogoAsImageData();
+    if (logoData) {
+      doc.addImage(logoData, 'PNG', 128.5, 8, 40, 40);
+    }
+  } catch { }
+
+  // Set up the PDF title
+  doc.setFontSize(26);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Student AI', 148.5, 46, { align: 'center' });
 
   doc.setFontSize(20);
   doc.setFont('helvetica', 'bold');
-  doc.text('Certificate of Completion', 105, 60, { align: 'center' });
+  doc.text('Certificate of Completion', 148.5, 64, { align: 'center' });
 
   doc.setFontSize(14);
   doc.setFont('helvetica', 'normal');
-  doc.text('This is to certify that', 105, 80, { align: 'center' });
+  doc.text('This is to certify that', 148.5, 82, { align: 'center' });
 
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
-  doc.text(name, 105, 95, { align: 'center' });
+  doc.text(name, 148.5, 97, { align: 'center' });
 
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  doc.text('has successfully completed the', 105, 110, { align: 'center' });
+  doc.text('has successfully completed the', 148.5, 112, { align: 'center' });
 
   doc.setFontSize(14);
   doc.setFont('helvetica', 'bold');
-  doc.text('Digital Marketing Certification Exam', 105, 125, { align: 'center' });
+  doc.text('Digital Marketing Certification Exam', 148.5, 127, { align: 'center' });
 
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  doc.text(`Score: ${score.marks}/100 (${score.percentage}%)`, 105, 145, { align: 'center' });
-  doc.text(`Date: ${currentDate}`, 105, 155, { align: 'center' });
+  doc.text(`Score: ${score.marks}/100 (${score.percentage}%)`, 148.5, 144, { align: 'center' });
+  doc.text(`Date: ${currentDate}`, 148.5, 154, { align: 'center' });
 
   // Add signature lines
-  doc.text('Student AI', 50, 180);
-  doc.text('Digital Marketing Expert', 150, 180);
+  doc.text('Student AI', 80, 176);
+  doc.text('Digital Marketing Expert', 220, 176);
 
   // Add certificate ID
   doc.setFontSize(8);
-  doc.text(`Certificate ID: DM-${Date.now().toString().slice(-8)}`, 105, 200, { align: 'center' });
+  doc.text(`Certificate ID: DM-${Date.now().toString().slice(-8)}`, 148.5, 186, { align: 'center' });
+  doc.setFontSize(10);
+  doc.text('Powered by DeployH.ai', 148.5, 194, { align: 'center' });
 
   // Download the PDF
   doc.save(`Digital_Marketing_Certificate_${name.replace(/\s+/g, '_')}.pdf`);
@@ -940,6 +966,9 @@ function showIndividualLesson(lessonIndex) {
   currentLesson = currentCourse.lessons[lessonIndex];
 
   individualLessonTitle.textContent = currentLesson.title || `Lesson ${lessonIndex + 1}`;
+  if (individualLessonTags) {
+    individualLessonTags.innerHTML = (currentCourse.tags || []).map(tag => `<span class='rounded-full bg-white border border-slate-200 px-2.5 py-1 text-xs font-medium'>${escapeHtml(tag)}</span>`).join('');
+  }
 
   // Use course cover image instead of individual lesson image
   let imageUrl = currentCourse.cover || defaultCover;
@@ -999,6 +1028,9 @@ function renderFullCourse(startIndex = null) {
 
   lessonTitle.textContent = `${escapeHtml(currentCourse.title || '')} — All lessons`;
   lessonMeta.textContent = '';
+  if (lessonTags) {
+    lessonTags.innerHTML = (currentCourse.tags || []).map(tag => `<span class='rounded-full bg-white border border-slate-200 px-2.5 py-1 text-xs font-medium'>${escapeHtml(tag)}</span>`).join('');
+  }
   lessonContent.innerHTML = `<div class="prose max-w-none">${courseImageHtml}${blocks.join('\n')}</div>`;
 
   // show/hide sections
@@ -1038,9 +1070,12 @@ async function loadLogoAsImageData() {
 
     return new Promise((resolve, reject) => {
       img.onload = function () {
-        canvas.width = 100; // Set logo width
-        canvas.height = 100; // Set logo height
-        ctx.drawImage(img, 0, 0, 100, 100);
+        // Render at high resolution to avoid blurriness in PDF
+        const targetPx = 600; // high-res rasterization
+        canvas.width = targetPx;
+        canvas.height = targetPx;
+        ctx.imageSmoothingEnabled = true;
+        ctx.drawImage(img, 0, 0, targetPx, targetPx);
         const imageData = canvas.toDataURL('image/png');
         resolve(imageData);
       };
