@@ -298,7 +298,9 @@ const backToDashboardFromMockBtn = document.getElementById(
 const mockInterviewCard = document.getElementById("mockInterviewCard");
 const mockInterviewMeta = document.getElementById("mockInterviewMeta");
 const mockInterviewTitle = document.getElementById("mockInterviewTitle");
-const downloadMockInterviewBtn = document.getElementById("downloadMockInterviewBtn");
+const downloadMockInterviewBtn = document.getElementById(
+  "downloadMockInterviewBtn"
+);
 
 let currentCourse = null;
 
@@ -1748,7 +1750,10 @@ function startMockInterview(
   const pool = buildMockInterviewPool(courseId);
   // Debug logs (temporary)
   try {
-    console.log("Mock pool total items:", Array.isArray(pool) ? pool.length : 0);
+    console.log(
+      "Mock pool total items:",
+      Array.isArray(pool) ? pool.length : 0
+    );
     console.log(
       "Sample pool types count:",
       (Array.isArray(pool) ? pool : []).reduce((acc, it) => {
@@ -1771,18 +1776,23 @@ function startMockInterview(
   const descPool = (pool || []).filter((it) => it.type !== "mcq");
   const mcqPool = (pool || []).filter((it) => it.type === "mcq");
 
-  const descQs = pickRandomMockQuestions(descPool, 10, `${courseId || "global"}-desc`);
-  const mcqQs = pickRandomMockQuestions(mcqPool, 10, `${courseId || "global"}-mcq`);
+  const descQs = pickRandomMockQuestions(
+    descPool,
+    10,
+    `${courseId || "global"}-desc`
+  );
+  const mcqQs = pickRandomMockQuestions(
+    mcqPool,
+    10,
+    `${courseId || "global"}-mcq`
+  );
 
   // store last rendered set globally for PDF download
   window.__lastMockInterviewSet = { courseId, desc: descQs, mcq: mcqQs };
 
   const descCount = descQs.length;
   const mcqCount = mcqQs.length;
-  let html = `<div class="mb-4"><h2 class="text-2xl font-semibold">${
-    currentCourse ? escapeHtml(currentCourse.title) + " — " : ""
-  }Mock Interview</h2>
-              <p class="text-sm text-slate-600 mt-1">This set shows descriptive first, then MCQs. Counts depend on available pool.</p></div>`;
+  let html = "";
 
   // Section A: Descriptive
   html += `<div class="space-y-4">
@@ -1849,7 +1859,9 @@ async function downloadMockInterviewPDF() {
     return;
   }
 
-  const titleText = currentCourse ? `${currentCourse.title} — Mock Interview` : "Mock Interview";
+  const titleText = currentCourse
+    ? `${currentCourse.title} — Mock Interview`
+    : "Mock Interview";
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
@@ -1910,7 +1922,9 @@ async function downloadMockInterviewPDF() {
   (set.mcq || []).forEach((q, i) => {
     addLine(`Q${i + 1}. ${q.text}`);
     const opts = Array.isArray(q.options) ? q.options : [];
-    opts.forEach((opt, idx) => addLine(`${String.fromCharCode(65 + idx)}. ${opt}`, 8));
+    opts.forEach((opt, idx) =>
+      addLine(`${String.fromCharCode(65 + idx)}. ${opt}`, 8)
+    );
     y += 2;
   });
 
