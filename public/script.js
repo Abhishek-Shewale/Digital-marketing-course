@@ -1,3 +1,607 @@
+/* ------------- DATA: Exam Questions for Digital Marketing Certification ------------- */
+const examQuestions = [
+  {
+    id: 1,
+    question: "What does SEO stand for?",
+    options: [
+      "Search Engine Optimization",
+      "Social Engine Optimization",
+      "Search Engine Organization",
+      "Social Engine Organization"
+    ],
+    correct: 0,
+    explanation: "SEO stands for Search Engine Optimization, which is the practice of improving web pages to rank higher in search engine results."
+  },
+  {
+    id: 2,
+    question: "Which of the following is NOT a search engine ranking factor?",
+    options: [
+      "Page loading speed",
+      "Mobile responsiveness",
+      "Number of social media followers",
+      "Quality of backlinks"
+    ],
+    correct: 2,
+    explanation: "While social media can indirectly impact SEO, the number of social media followers is not a direct ranking factor for search engines."
+  },
+  {
+    id: 3,
+    question: "What is the primary purpose of keyword research?",
+    options: [
+      "To find the most expensive keywords",
+      "To understand what users are searching for",
+      "To copy competitor content",
+      "To increase website loading speed"
+    ],
+    correct: 1,
+    explanation: "Keyword research helps understand user search behavior and intent, allowing you to create content that matches what people are looking for."
+  },
+  {
+    id: 4,
+    question: "Which meta tag is most important for SEO?",
+    options: [
+      "Meta description",
+      "Title tag",
+      "Meta keywords",
+      "Meta author"
+    ],
+    correct: 1,
+    explanation: "The title tag is the most important meta tag for SEO as it appears in search results and is a key ranking factor."
+  },
+  {
+    id: 5,
+    question: "What does PPC stand for in digital marketing?",
+    options: [
+      "Pay Per Click",
+      "Pay Per Conversion",
+      "Pay Per Customer",
+      "Pay Per Campaign"
+    ],
+    correct: 0,
+    explanation: "PPC stands for Pay Per Click, a model where advertisers pay only when someone clicks on their ad."
+  },
+  {
+    id: 6,
+    question: "Which platform is most commonly used for SEM campaigns?",
+    options: [
+      "Facebook Ads",
+      "Google Ads",
+      "LinkedIn Ads",
+      "Twitter Ads"
+    ],
+    correct: 1,
+    explanation: "Google Ads is the most commonly used platform for Search Engine Marketing (SEM) campaigns."
+  },
+  {
+    id: 7,
+    question: "What is the main difference between SEO and SEM?",
+    options: [
+      "SEO is free, SEM is paid",
+      "SEO is faster, SEM is slower",
+      "SEO uses images, SEM uses text",
+      "SEO is for mobile, SEM is for desktop"
+    ],
+    correct: 0,
+    explanation: "SEO (Search Engine Optimization) is primarily free organic optimization, while SEM (Search Engine Marketing) involves paid advertising."
+  },
+  {
+    id: 8,
+    question: "What does CTR stand for?",
+    options: [
+      "Click Through Rate",
+      "Conversion Through Rate",
+      "Cost Through Rate",
+      "Content Through Rate"
+    ],
+    correct: 0,
+    explanation: "CTR stands for Click Through Rate, which measures the percentage of people who click on your ad or link."
+  },
+  {
+    id: 9,
+    question: "Which of the following is a technical SEO factor?",
+    options: [
+      "Content quality",
+      "Backlinks",
+      "Site speed",
+      "Social media presence"
+    ],
+    correct: 2,
+    explanation: "Site speed is a technical SEO factor that affects how search engines crawl and index your website."
+  },
+  {
+    id: 10,
+    question: "What is the purpose of a sitemap?",
+    options: [
+      "To improve page loading speed",
+      "To help search engines discover and index pages",
+      "To increase social media engagement",
+      "To track user behavior"
+    ],
+    correct: 1,
+    explanation: "A sitemap helps search engines discover and understand the structure of your website for better indexing."
+  },
+  {
+    id: 11,
+    question: "Which of the following is NOT a type of keyword match type in Google Ads?",
+    options: [
+      "Broad match",
+      "Phrase match",
+      "Exact match",
+      "Partial match"
+    ],
+    correct: 3,
+    explanation: "Google Ads uses broad match, phrase match, and exact match. Partial match is not a standard match type."
+  },
+  {
+    id: 12,
+    question: "What does Quality Score measure in Google Ads?",
+    options: [
+      "The amount of money spent on ads",
+      "The relevance and quality of ads and landing pages",
+      "The number of clicks received",
+      "The time spent on the website"
+    ],
+    correct: 1,
+    explanation: "Quality Score measures the relevance and quality of your ads, keywords, and landing pages."
+  },
+  {
+    id: 13,
+    question: "What is the primary goal of content marketing?",
+    options: [
+      "To sell products directly",
+      "To provide value and build relationships",
+      "To increase website speed",
+      "To reduce advertising costs"
+    ],
+    correct: 1,
+    explanation: "Content marketing focuses on providing valuable, relevant content to attract and engage a target audience."
+  },
+  {
+    id: 14,
+    question: "Which metric measures the percentage of visitors who complete a desired action?",
+    options: [
+      "Bounce rate",
+      "Conversion rate",
+      "Click-through rate",
+      "Impressions"
+    ],
+    correct: 1,
+    explanation: "Conversion rate measures the percentage of visitors who complete a desired action, such as making a purchase or filling out a form."
+  },
+  {
+    id: 15,
+    question: "What does ROI stand for in digital marketing?",
+    options: [
+      "Return On Investment",
+      "Rate Of Interest",
+      "Revenue On Investment",
+      "Return On Impressions"
+    ],
+    correct: 0,
+    explanation: "ROI stands for Return On Investment, measuring the profitability of marketing campaigns."
+  },
+  {
+    id: 16,
+    question: "Which of the following is a social media marketing platform?",
+    options: [
+      "Google Analytics",
+      "Facebook",
+      "Google Search Console",
+      "SEMrush"
+    ],
+    correct: 1,
+    explanation: "Facebook is a social media platform used for social media marketing, while the others are analytics or SEO tools."
+  },
+  {
+    id: 17,
+    question: "What is the purpose of A/B testing in digital marketing?",
+    options: [
+      "To increase website speed",
+      "To compare different versions of content or ads",
+      "To reduce advertising costs",
+      "To improve social media engagement"
+    ],
+    correct: 1,
+    explanation: "A/B testing compares different versions of content, ads, or web pages to determine which performs better."
+  },
+  {
+    id: 18,
+    question: "Which of the following is NOT a digital marketing channel?",
+    options: [
+      "Email marketing",
+      "Content marketing",
+      "Television advertising",
+      "Social media marketing"
+    ],
+    correct: 2,
+    explanation: "Television advertising is traditional marketing, not digital marketing. Digital marketing channels include email, content, and social media."
+  },
+  {
+    id: 19,
+    question: "What does CRM stand for?",
+    options: [
+      "Customer Relationship Management",
+      "Content Relationship Management",
+      "Campaign Relationship Management",
+      "Conversion Relationship Management"
+    ],
+    correct: 0,
+    explanation: "CRM stands for Customer Relationship Management, a system for managing customer interactions and relationships."
+  },
+  {
+    id: 20,
+    question: "Which of the following is a key benefit of email marketing?",
+    options: [
+      "Immediate viral reach",
+      "High cost-effectiveness and personalization",
+      "No need for content creation",
+      "Guaranteed high open rates"
+    ],
+    correct: 1,
+    explanation: "Email marketing is cost-effective and allows for personalization, making it a valuable digital marketing channel."
+  },
+  {
+    id: 21,
+    question: "What is the primary purpose of Google Analytics?",
+    options: [
+      "To create websites",
+      "To track and analyze website traffic",
+      "To manage social media accounts",
+      "To design advertisements"
+    ],
+    correct: 1,
+    explanation: "Google Analytics is a web analytics service that tracks and reports website traffic and user behavior."
+  },
+  {
+    id: 22,
+    question: "Which of the following is a mobile marketing strategy?",
+    options: [
+      "Print advertising",
+      "SMS marketing",
+      "Radio advertising",
+      "Billboard advertising"
+    ],
+    correct: 1,
+    explanation: "SMS marketing is a mobile marketing strategy that targets users on their mobile devices."
+  },
+  {
+    id: 23,
+    question: "What does CPC stand for?",
+    options: [
+      "Cost Per Click",
+      "Cost Per Conversion",
+      "Cost Per Customer",
+      "Cost Per Campaign"
+    ],
+    correct: 0,
+    explanation: "CPC stands for Cost Per Click, the amount paid for each click on an advertisement."
+  },
+  {
+    id: 24,
+    question: "Which of the following is a content marketing format?",
+    options: [
+      "Blog posts",
+      "Paid advertisements",
+      "Cold calling",
+      "Direct mail"
+    ],
+    correct: 0,
+    explanation: "Blog posts are a common content marketing format used to provide value and attract audiences."
+  },
+  {
+    id: 25,
+    question: "What is the main advantage of programmatic advertising?",
+    options: [
+      "Lower costs and better targeting",
+      "Higher creative control",
+      "Simpler campaign setup",
+      "Better customer service"
+    ],
+    correct: 0,
+    explanation: "Programmatic advertising offers lower costs and more precise targeting through automated buying and selling of ad inventory."
+  },
+  {
+    id: 26,
+    question: "Which of the following is a key performance indicator (KPI) for social media marketing?",
+    options: [
+      "Website loading speed",
+      "Email open rates",
+      "Engagement rate",
+      "Search rankings"
+    ],
+    correct: 2,
+    explanation: "Engagement rate is a key KPI for social media marketing, measuring how users interact with content."
+  },
+  {
+    id: 27,
+    question: "What does CPM stand for?",
+    options: [
+      "Cost Per Mille (thousand impressions)",
+      "Cost Per Minute",
+      "Cost Per Month",
+      "Cost Per Message"
+    ],
+    correct: 0,
+    explanation: "CPM stands for Cost Per Mille, which means cost per thousand impressions in advertising."
+  },
+  {
+    id: 28,
+    question: "Which of the following is a benefit of influencer marketing?",
+    options: [
+      "Guaranteed sales",
+      "Access to engaged audiences",
+      "No content creation needed",
+      "Immediate viral reach"
+    ],
+    correct: 1,
+    explanation: "Influencer marketing provides access to engaged audiences who trust the influencer's recommendations."
+  },
+  {
+    id: 29,
+    question: "What is the primary purpose of remarketing?",
+    options: [
+      "To attract new customers",
+      "To re-engage previous website visitors",
+      "To increase website speed",
+      "To improve SEO rankings"
+    ],
+    correct: 1,
+    explanation: "Remarketing targets users who have previously visited your website to encourage them to return and convert."
+  },
+  {
+    id: 30,
+    question: "Which of the following is a mobile-first design principle?",
+    options: [
+      "Design for desktop first",
+      "Design for mobile devices first",
+      "Use only text content",
+      "Avoid images and videos"
+    ],
+    correct: 1,
+    explanation: "Mobile-first design prioritizes mobile devices in the design process, then adapts for larger screens."
+  },
+  {
+    id: 31,
+    question: "What does UX stand for in digital marketing?",
+    options: [
+      "User Experience",
+      "User Exchange",
+      "User Extension",
+      "User Execution"
+    ],
+    correct: 0,
+    explanation: "UX stands for User Experience, focusing on how users interact with and experience a product or service."
+  },
+  {
+    id: 32,
+    question: "Which of the following is a video marketing platform?",
+    options: [
+      "LinkedIn",
+      "YouTube",
+      "Twitter",
+      "Pinterest"
+    ],
+    correct: 1,
+    explanation: "YouTube is a primary video marketing platform where businesses can share video content and advertisements."
+  },
+  {
+    id: 33,
+    question: "What is the main purpose of marketing automation?",
+    options: [
+      "To reduce marketing costs",
+      "To automate repetitive marketing tasks",
+      "To increase website speed",
+      "To improve SEO rankings"
+    ],
+    correct: 1,
+    explanation: "Marketing automation streamlines and automates repetitive marketing tasks to improve efficiency and personalization."
+  },
+  {
+    id: 34,
+    question: "Which of the following is a benefit of personalization in digital marketing?",
+    options: [
+      "Lower advertising costs",
+      "Improved user experience and engagement",
+      "Faster website loading",
+      "Better SEO rankings"
+    ],
+    correct: 1,
+    explanation: "Personalization improves user experience and engagement by delivering relevant content to individual users."
+  },
+  {
+    id: 35,
+    question: "What does API stand for in digital marketing?",
+    options: [
+      "Application Programming Interface",
+      "Advertising Performance Indicator",
+      "Automated Personalization Interface",
+      "Advanced Payment Integration"
+    ],
+    correct: 0,
+    explanation: "API stands for Application Programming Interface, allowing different software systems to communicate and share data."
+  },
+  {
+    id: 36,
+    question: "Which of the following is a key component of digital marketing strategy?",
+    options: [
+      "Website design only",
+      "Social media presence only",
+      "Integrated multi-channel approach",
+      "Email marketing only"
+    ],
+    correct: 2,
+    explanation: "A successful digital marketing strategy requires an integrated multi-channel approach across various platforms and tactics."
+  },
+  {
+    id: 37,
+    question: "What is the primary goal of lead generation?",
+    options: [
+      "To increase website traffic",
+      "To identify and capture potential customers",
+      "To improve brand awareness",
+      "To reduce marketing costs"
+    ],
+    correct: 1,
+    explanation: "Lead generation focuses on identifying and capturing potential customers who have shown interest in your product or service."
+  },
+  {
+    id: 38,
+    question: "Which of the following is a benefit of data-driven marketing?",
+    options: [
+      "Reduced need for creativity",
+      "Better decision-making based on insights",
+      "Lower advertising costs",
+      "Simpler campaign management"
+    ],
+    correct: 1,
+    explanation: "Data-driven marketing enables better decision-making by using data insights to optimize campaigns and strategies."
+  },
+  {
+    id: 39,
+    question: "What does GDPR stand for?",
+    options: [
+      "General Data Protection Regulation",
+      "Global Digital Privacy Rules",
+      "General Digital Performance Regulation",
+      "Global Data Processing Rules"
+    ],
+    correct: 0,
+    explanation: "GDPR stands for General Data Protection Regulation, a European Union law on data protection and privacy."
+  },
+  {
+    id: 40,
+    question: "Which of the following is a key trend in digital marketing?",
+    options: [
+      "Reduced use of mobile devices",
+      "Increased focus on privacy and data protection",
+      "Decreased importance of video content",
+      "Less emphasis on personalization"
+    ],
+    correct: 1,
+    explanation: "Increased focus on privacy and data protection is a key trend, driven by regulations like GDPR and consumer concerns."
+  },
+  {
+    id: 41,
+    question: "What is the main advantage of omnichannel marketing?",
+    options: [
+      "Lower costs",
+      "Consistent customer experience across all touchpoints",
+      "Simpler campaign management",
+      "Better SEO rankings"
+    ],
+    correct: 1,
+    explanation: "Omnichannel marketing provides a consistent customer experience across all channels and touchpoints."
+  },
+  {
+    id: 42,
+    question: "Which of the following is a key metric for email marketing?",
+    options: [
+      "Website loading speed",
+      "Open rate",
+      "Search rankings",
+      "Social media followers"
+    ],
+    correct: 1,
+    explanation: "Open rate is a key email marketing metric that measures the percentage of recipients who open an email."
+  },
+  {
+    id: 43,
+    question: "What is the primary purpose of customer segmentation?",
+    options: [
+      "To reduce marketing costs",
+      "To deliver targeted and relevant messages",
+      "To increase website speed",
+      "To improve SEO rankings"
+    ],
+    correct: 1,
+    explanation: "Customer segmentation allows marketers to deliver targeted and relevant messages to specific groups of customers."
+  },
+  {
+    id: 44,
+    question: "Which of the following is a benefit of voice search optimization?",
+    options: [
+      "Reduced need for content creation",
+      "Better visibility in voice search results",
+      "Lower advertising costs",
+      "Simpler website design"
+    ],
+    correct: 1,
+    explanation: "Voice search optimization helps businesses appear in voice search results, which are becoming increasingly important."
+  },
+  {
+    id: 45,
+    question: "What does AI stand for in digital marketing?",
+    options: [
+      "Automated Intelligence",
+      "Artificial Intelligence",
+      "Advanced Integration",
+      "Automated Implementation"
+    ],
+    correct: 1,
+    explanation: "AI stands for Artificial Intelligence, which is increasingly used in digital marketing for personalization and automation."
+  },
+  {
+    id: 46,
+    question: "Which of the following is a key component of conversion optimization?",
+    options: [
+      "Increasing website traffic",
+      "Improving the user journey to increase conversions",
+      "Reducing advertising costs",
+      "Improving social media engagement"
+    ],
+    correct: 1,
+    explanation: "Conversion optimization focuses on improving the user journey and experience to increase the likelihood of conversions."
+  },
+  {
+    id: 47,
+    question: "What is the main purpose of marketing attribution?",
+    options: [
+      "To reduce marketing costs",
+      "To understand which marketing efforts drive conversions",
+      "To increase website speed",
+      "To improve brand awareness"
+    ],
+    correct: 1,
+    explanation: "Marketing attribution helps understand which marketing channels and touchpoints contribute to conversions."
+  },
+  {
+    id: 48,
+    question: "Which of the following is a benefit of real-time marketing?",
+    options: [
+      "Lower costs",
+      "Relevance and timeliness in messaging",
+      "Simpler campaign setup",
+      "Better SEO rankings"
+    ],
+    correct: 1,
+    explanation: "Real-time marketing allows for timely and relevant messaging based on current events and user behavior."
+  },
+  {
+    id: 49,
+    question: "What does AR stand for in digital marketing?",
+    options: [
+      "Advanced Reporting",
+      "Augmented Reality",
+      "Automated Response",
+      "Analytics and Research"
+    ],
+    correct: 1,
+    explanation: "AR stands for Augmented Reality, a technology that overlays digital information on the real world."
+  },
+  {
+    id: 50,
+    question: "Which of the following is a key principle of ethical digital marketing?",
+    options: [
+      "Maximize profits at any cost",
+      "Transparency and honesty in communications",
+      "Target vulnerable populations",
+      "Ignore privacy concerns"
+    ],
+    correct: 1,
+    explanation: "Ethical digital marketing requires transparency and honesty in all communications with customers and prospects."
+  }
+];
+
 /* ------------- DATA: important topics for each course ------------- */
 const importantTopics = {
   seo: {
@@ -1504,6 +2108,36 @@ const importantTopicsNoteText = document.getElementById('importantTopicsNoteText
 const backToDashboardFromTopicsBtn = document.getElementById('backToDashboardFromTopicsBtn');
 const downloadImportantTopicsBtn = document.getElementById('downloadImportantTopicsBtn');
 
+// Exam system elements
+const examSystemView = document.getElementById('examSystemView');
+const examMeta = document.getElementById('examMeta');
+const examInstructions = document.getElementById('examInstructions');
+const examInterface = document.getElementById('examInterface');
+const examResults = document.getElementById('examResults');
+const certificateDisplay = document.getElementById('certificateDisplay');
+const backToDashboardFromExamBtn = document.getElementById('backToDashboardFromExamBtn');
+const startExamBtn = document.getElementById('startExamBtn');
+const submitExamBtn = document.getElementById('submitExamBtn');
+const retakeExamBtn = document.getElementById('retakeExamBtn');
+const generateCertificateBtn = document.getElementById('generateCertificateBtn');
+const downloadCertificateBtn = document.getElementById('downloadCertificateBtn');
+const backToResultsBtn = document.getElementById('backToResultsBtn');
+const timer = document.getElementById('timer');
+const currentQuestion = document.getElementById('currentQuestion');
+const progressPercentage = document.getElementById('progressPercentage');
+const progressBar = document.getElementById('progressBar');
+const questionNavigation = document.getElementById('questionNavigation');
+const questionText = document.getElementById('questionText');
+const questionOptions = document.getElementById('questionOptions');
+const prevQuestionBtn = document.getElementById('prevQuestionBtn');
+const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const certificateSection = document.getElementById('certificateSection');
+const retakeSection = document.getElementById('retakeSection');
+const studentName = document.getElementById('studentName');
+const detailedResults = document.getElementById('detailedResults');
+const certificateContent = document.getElementById('certificateContent');
+
 // Lesson cards elements
 const lessonCardsTitle = document.getElementById('lessonCardsTitle');
 const lessonCardsMeta = document.getElementById('lessonCardsMeta');
@@ -1524,6 +2158,16 @@ const backToCourseBtn = document.getElementById('backToCourseBtn');
 const downloadFullCourseBtn = document.getElementById('downloadFullCourseBtn');
 
 let currentCourse = null;
+
+// Exam system variables
+let examState = {
+  currentQuestionIndex: 0,
+  answers: {},
+  timeRemaining: 3600, // 60 minutes in seconds
+  timerInterval: null,
+  isExamStarted: false,
+  isExamCompleted: false
+};
 let currentLesson = null;
 
 /* ------------- render cards ------------- */
@@ -1623,6 +2267,7 @@ function showCourseDashboard() {
   individualLessonSection?.classList.add('hidden');
   courseInfoSection?.classList.add('hidden');
   importantTopicsSection?.classList.add('hidden');
+  examSystemView?.classList.add('hidden');
   courseDashboardSection?.classList.remove('hidden');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1666,6 +2311,7 @@ function showLessonCards() {
   courseInfoSection?.classList.add('hidden');
   courseDashboardSection?.classList.add('hidden');
   importantTopicsSection?.classList.add('hidden');
+  examSystemView?.classList.add('hidden');
   lessonCardsSection?.classList.remove('hidden');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1723,9 +2369,501 @@ function showImportantTopics() {
   courseInfoSection?.classList.add('hidden');
   courseDashboardSection?.classList.add('hidden');
   lessonCardsSection?.classList.add('hidden');
+  examSystemView?.classList.add('hidden');
   importantTopicsSection?.classList.remove('hidden');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ------------- show exam system ------------- */
+function showExamSystem() {
+  if (!currentCourse) return;
+
+  // Reset exam state
+  examState = {
+    currentQuestionIndex: 0,
+    answers: {},
+    timeRemaining: 3600, // 60 minutes in seconds
+    timerInterval: null,
+    isExamStarted: false,
+    isExamCompleted: false
+  };
+
+  // Update exam meta
+  examMeta.textContent = `${currentCourse.title} • Certification Exam`;
+
+  // Show exam instructions
+  examInstructions.classList.remove('hidden');
+  examInterface.classList.add('hidden');
+  examResults.classList.add('hidden');
+  certificateDisplay.classList.add('hidden');
+
+  // show/hide sections
+  heroSection?.classList.add('hidden');
+  coursesSection?.classList.add('hidden');
+  lessonSection?.classList.add('hidden');
+  individualLessonSection?.classList.add('hidden');
+  courseInfoSection?.classList.add('hidden');
+  courseDashboardSection?.classList.add('hidden');
+  lessonCardsSection?.classList.add('hidden');
+  importantTopicsSection?.classList.add('hidden');
+  examSystemView?.classList.remove('hidden');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ------------- start exam ------------- */
+function startExam() {
+  examState.isExamStarted = true;
+  examState.timeRemaining = 3600; // Reset to 60 minutes
+
+  // Hide instructions and show exam interface
+  examInstructions.classList.add('hidden');
+  examInterface.classList.remove('hidden');
+
+  // Initialize exam
+  initializeExam();
+  startTimer();
+  displayQuestion();
+  generateQuestionNavigation();
+}
+
+/* ------------- initialize exam ------------- */
+function initializeExam() {
+  examState.currentQuestionIndex = 0;
+  examState.answers = {};
+  examState.isExamCompleted = false;
+}
+
+/* ------------- start timer ------------- */
+function startTimer() {
+  if (examState.timerInterval) {
+    clearInterval(examState.timerInterval);
+  }
+
+  examState.timerInterval = setInterval(() => {
+    examState.timeRemaining--;
+    updateTimerDisplay();
+
+    if (examState.timeRemaining <= 0) {
+      clearInterval(examState.timerInterval);
+      submitExam();
+    }
+  }, 1000);
+}
+
+/* ------------- update timer display ------------- */
+function updateTimerDisplay() {
+  const minutes = Math.floor(examState.timeRemaining / 60);
+  const seconds = examState.timeRemaining % 60;
+  timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+  // Change color when time is running low
+  if (examState.timeRemaining <= 300) { // 5 minutes
+    timer.parentElement.classList.add('text-red-400');
+  } else {
+    timer.parentElement.classList.remove('text-red-400');
+  }
+}
+
+/* ------------- display question ------------- */
+function displayQuestion() {
+  const question = examQuestions[examState.currentQuestionIndex];
+  if (!question) return;
+
+  // Update question number and progress
+  currentQuestion.textContent = examState.currentQuestionIndex + 1;
+  const progress = ((examState.currentQuestionIndex + 1) / examQuestions.length) * 100;
+  progressPercentage.textContent = `${Math.round(progress)}%`;
+  progressBar.style.width = `${progress}%`;
+
+  // Display question
+  questionText.textContent = question.question;
+
+  // Display options
+  questionOptions.innerHTML = '';
+  question.options.forEach((option, index) => {
+    const optionElement = document.createElement('div');
+    optionElement.className = 'flex items-center p-4 border border-slate-200 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors';
+
+    const isSelected = examState.answers[examState.currentQuestionIndex] === index;
+    if (isSelected) {
+      optionElement.classList.add('bg-blue-50', 'border-blue-300');
+    }
+
+    optionElement.innerHTML = `
+      <input type="radio" name="question-${examState.currentQuestionIndex}" value="${index}" 
+             class="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500" 
+             ${isSelected ? 'checked' : ''}>
+      <label class="ml-3 text-slate-700 cursor-pointer flex-1">${option}</label>
+    `;
+
+    optionElement.addEventListener('click', () => {
+      // Remove selection from other options
+      questionOptions.querySelectorAll('.bg-blue-50').forEach(el => {
+        el.classList.remove('bg-blue-50', 'border-blue-300');
+      });
+
+      // Remove checked from all radio buttons
+      questionOptions.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.checked = false;
+      });
+
+      // Add selection to clicked option
+      optionElement.classList.add('bg-blue-50', 'border-blue-300');
+
+      // Check the radio button
+      const radioButton = optionElement.querySelector('input[type="radio"]');
+      radioButton.checked = true;
+
+      // Update answer
+      examState.answers[examState.currentQuestionIndex] = index;
+
+      // Update navigation
+      updateQuestionNavigation();
+    });
+
+    questionOptions.appendChild(optionElement);
+  });
+
+  // Update navigation buttons
+  prevQuestionBtn.disabled = examState.currentQuestionIndex === 0;
+  nextQuestionBtn.disabled = examState.currentQuestionIndex === examQuestions.length - 1;
+
+  if (examState.currentQuestionIndex === 0) {
+    prevQuestionBtn.classList.add('opacity-50', 'cursor-not-allowed');
+  } else {
+    prevQuestionBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+  }
+
+  if (examState.currentQuestionIndex === examQuestions.length - 1) {
+    nextQuestionBtn.textContent = 'Submit Exam';
+    nextQuestionBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+    nextQuestionBtn.classList.remove('bg-slate-900', 'hover:bg-slate-800');
+  } else {
+    nextQuestionBtn.textContent = 'Next →';
+    nextQuestionBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+    nextQuestionBtn.classList.add('bg-slate-900', 'hover:bg-slate-800');
+  }
+}
+
+/* ------------- generate question navigation ------------- */
+function generateQuestionNavigation() {
+  questionNavigation.innerHTML = '';
+
+  for (let i = 0; i < examQuestions.length; i++) {
+    const navButton = document.createElement('button');
+    navButton.className = 'w-10 h-10 rounded-lg border border-slate-300 text-sm font-medium transition-colors';
+    navButton.textContent = i + 1;
+    navButton.addEventListener('click', () => {
+      examState.currentQuestionIndex = i;
+      displayQuestion();
+    });
+
+    questionNavigation.appendChild(navButton);
+  }
+
+  updateQuestionNavigation();
+}
+
+/* ------------- update question navigation ------------- */
+function updateQuestionNavigation() {
+  const navButtons = questionNavigation.querySelectorAll('button');
+  navButtons.forEach((button, index) => {
+    const hasAnswer = examState.answers[index] !== undefined;
+    const isCurrent = index === examState.currentQuestionIndex;
+
+    button.classList.remove('bg-blue-600', 'text-white', 'bg-green-100', 'text-green-700', 'bg-slate-100');
+
+    if (isCurrent) {
+      button.classList.add('bg-blue-600', 'text-white');
+    } else if (hasAnswer) {
+      button.classList.add('bg-green-100', 'text-green-700');
+    } else {
+      button.classList.add('bg-slate-100');
+    }
+  });
+}
+
+/* ------------- navigate to previous question ------------- */
+function goToPreviousQuestion() {
+  if (examState.currentQuestionIndex > 0) {
+    examState.currentQuestionIndex--;
+    displayQuestion();
+  }
+}
+
+/* ------------- navigate to next question ------------- */
+function goToNextQuestion() {
+  if (examState.currentQuestionIndex < examQuestions.length - 1) {
+    examState.currentQuestionIndex++;
+    displayQuestion();
+  } else {
+    // Last question - submit exam
+    submitExam();
+  }
+}
+
+/* ------------- submit exam ------------- */
+function submitExam() {
+  if (examState.timerInterval) {
+    clearInterval(examState.timerInterval);
+  }
+
+  examState.isExamCompleted = true;
+
+  // Calculate score
+  const score = calculateScore();
+
+  // Hide exam interface and show results
+  examInterface.classList.add('hidden');
+  examResults.classList.remove('hidden');
+
+  // Display results
+  displayExamResults(score);
+}
+
+/* ------------- calculate score ------------- */
+function calculateScore() {
+  let correctAnswers = 0;
+
+  examQuestions.forEach((question, index) => {
+    if (examState.answers[index] === question.correct) {
+      correctAnswers++;
+    }
+  });
+
+  return {
+    correct: correctAnswers,
+    total: examQuestions.length,
+    percentage: Math.round((correctAnswers / examQuestions.length) * 100),
+    marks: correctAnswers * 2 // 2 marks per question
+  };
+}
+
+/* ------------- display exam results ------------- */
+function displayExamResults(score) {
+  // Display score
+  scoreDisplay.innerHTML = `
+    <div class="text-center">
+      <div class="w-24 h-24 rounded-full ${score.marks >= 50 ? 'bg-green-100' : 'bg-red-100'} flex items-center justify-center mx-auto mb-4">
+        <span class="text-3xl font-bold ${score.marks >= 50 ? 'text-green-600' : 'text-red-600'}">${score.marks}</span>
+      </div>
+      <h3 class="text-2xl font-bold text-slate-900 mb-2">${score.marks}/100 Marks</h3>
+      <p class="text-slate-600 mb-4">You answered ${score.correct} out of ${score.total} questions correctly</p>
+      <div class="text-sm text-slate-500">
+        <p>Percentage: ${score.percentage}%</p>
+        <p>${score.marks >= 50 ? 'Congratulations! You passed!' : 'You need at least 50 marks to pass.'}</p>
+      </div>
+    </div>
+  `;
+
+  // Show certificate section or retake section
+  if (score.marks >= 50) {
+    certificateSection.classList.remove('hidden');
+    retakeSection.classList.add('hidden');
+  } else {
+    certificateSection.classList.add('hidden');
+    retakeSection.classList.remove('hidden');
+  }
+
+  // Display detailed results
+  displayDetailedResults(score);
+}
+
+/* ------------- display detailed results ------------- */
+function displayDetailedResults(score) {
+  detailedResults.innerHTML = '';
+
+  examQuestions.forEach((question, index) => {
+    const userAnswer = examState.answers[index];
+    const isCorrect = userAnswer === question.correct;
+    const hasAnswer = userAnswer !== undefined;
+
+    const resultItem = document.createElement('div');
+    resultItem.className = `p-4 rounded-xl border ${isCorrect ? 'bg-green-50 border-green-200' : hasAnswer ? 'bg-red-50 border-red-200' : 'bg-yellow-50 border-yellow-200'}`;
+
+    resultItem.innerHTML = `
+      <div class="flex items-start gap-3">
+        <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${isCorrect ? 'bg-green-100' : hasAnswer ? 'bg-red-100' : 'bg-yellow-100'}">
+          <span class="text-xs font-bold ${isCorrect ? 'text-green-600' : hasAnswer ? 'text-red-600' : 'text-yellow-600'}">${index + 1}</span>
+        </div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-slate-900 mb-2">${question.question}</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center gap-2">
+              <span class="font-medium text-slate-700">Your answer:</span>
+              <span class="${hasAnswer ? (isCorrect ? 'text-green-600' : 'text-red-600') : 'text-yellow-600'}">
+                ${hasAnswer ? question.options[userAnswer] : 'Not answered'}
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-medium text-slate-700">Correct answer:</span>
+              <span class="text-green-600">${question.options[question.correct]}</span>
+            </div>
+            <div class="mt-2 p-2 bg-slate-100 rounded text-xs text-slate-600">
+              <strong>Explanation:</strong> ${question.explanation}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    detailedResults.appendChild(resultItem);
+  });
+}
+
+/* ------------- generate certificate ------------- */
+function generateCertificate() {
+  const name = studentName.value.trim();
+  if (!name) {
+    alert('Please enter your name for the certificate.');
+    return;
+  }
+
+  const score = calculateScore();
+
+  // Hide results and show certificate
+  examResults.classList.add('hidden');
+  certificateDisplay.classList.remove('hidden');
+
+  // Generate certificate content
+  generateCertificateContent(name, score);
+}
+
+/* ------------- generate certificate content ------------- */
+function generateCertificateContent(name, score) {
+  const currentDate = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  certificateContent.innerHTML = `
+    <div class="border-4 border-slate-800 p-8 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-slate-800 mb-2">Student AI</h1>
+        <p class="text-lg text-slate-600">Digital Marketing Education Platform</p>
+      </div>
+      
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-slate-800 mb-4">Certificate of Completion</h2>
+        <p class="text-xl text-slate-700 mb-6">This is to certify that</p>
+        <h3 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-800 pb-2 inline-block">${name}</h3>
+        <p class="text-lg text-slate-700 mb-4">has successfully completed the</p>
+        <h4 class="text-xl font-semibold text-slate-800 mb-6">Digital Marketing Certification Exam</h4>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-8 mb-8">
+        <div class="text-center">
+          <p class="text-sm text-slate-600 mb-1">Score Achieved</p>
+          <p class="text-2xl font-bold text-slate-800">${score.marks}/100</p>
+        </div>
+        <div class="text-center">
+          <p class="text-sm text-slate-600 mb-1">Percentage</p>
+          <p class="text-2xl font-bold text-slate-800">${score.percentage}%</p>
+        </div>
+      </div>
+      
+      <div class="text-center mb-8">
+        <p class="text-sm text-slate-600 mb-4">Date of Completion: ${currentDate}</p>
+        <div class="flex justify-center items-center gap-8">
+          <div class="text-center">
+            <div class="w-24 h-1 bg-slate-800 mb-2"></div>
+            <p class="text-xs text-slate-600">Student AI</p>
+          </div>
+          <div class="text-center">
+            <div class="w-24 h-1 bg-slate-800 mb-2"></div>
+            <p class="text-xs text-slate-600">Digital Marketing Expert</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <p class="text-xs text-slate-500">Certificate ID: DM-${Date.now().toString().slice(-8)}</p>
+      </div>
+    </div>
+  `;
+}
+
+/* ------------- download certificate as PDF ------------- */
+function downloadCertificate() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('landscape', 'mm', 'a4');
+
+  // Get certificate content
+  const certificateElement = certificateContent;
+  const name = studentName.value.trim();
+  const score = calculateScore();
+  const currentDate = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  // Set up the PDF
+  doc.setFontSize(24);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Student AI', 105, 30, { align: 'center' });
+
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Digital Marketing Education Platform', 105, 40, { align: 'center' });
+
+  doc.setFontSize(20);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Certificate of Completion', 105, 60, { align: 'center' });
+
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'normal');
+  doc.text('This is to certify that', 105, 80, { align: 'center' });
+
+  doc.setFontSize(16);
+  doc.setFont('helvetica', 'bold');
+  doc.text(name, 105, 95, { align: 'center' });
+
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'normal');
+  doc.text('has successfully completed the', 105, 110, { align: 'center' });
+
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Digital Marketing Certification Exam', 105, 125, { align: 'center' });
+
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'normal');
+  doc.text(`Score: ${score.marks}/100 (${score.percentage}%)`, 105, 145, { align: 'center' });
+  doc.text(`Date: ${currentDate}`, 105, 155, { align: 'center' });
+
+  // Add signature lines
+  doc.text('Student AI', 50, 180);
+  doc.text('Digital Marketing Expert', 150, 180);
+
+  // Add certificate ID
+  doc.setFontSize(8);
+  doc.text(`Certificate ID: DM-${Date.now().toString().slice(-8)}`, 105, 200, { align: 'center' });
+
+  // Download the PDF
+  doc.save(`Digital_Marketing_Certificate_${name.replace(/\s+/g, '_')}.pdf`);
+}
+
+/* ------------- retake exam ------------- */
+function retakeExam() {
+  // Reset exam state
+  examState = {
+    currentQuestionIndex: 0,
+    answers: {},
+    timeRemaining: 3600,
+    timerInterval: null,
+    isExamStarted: false,
+    isExamCompleted: false
+  };
+
+  // Show instructions again
+  examInstructions.classList.remove('hidden');
+  examInterface.classList.add('hidden');
+  examResults.classList.add('hidden');
+  certificateDisplay.classList.add('hidden');
 }
 
 /* ------------- show individual lesson ------------- */
@@ -1756,6 +2894,7 @@ function showIndividualLesson(lessonIndex) {
   courseDashboardSection?.classList.add('hidden');
   lessonCardsSection?.classList.add('hidden');
   importantTopicsSection?.classList.add('hidden');
+  examSystemView?.classList.add('hidden');
   individualLessonSection?.classList.remove('hidden');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1801,6 +2940,7 @@ function renderFullCourse(startIndex = null) {
   lessonCardsSection?.classList.add('hidden');
   individualLessonSection?.classList.add('hidden');
   importantTopicsSection?.classList.add('hidden');
+  examSystemView?.classList.add('hidden');
   lessonSection?.classList.remove('hidden');
 
   // scroll and optionally jump to a lesson
@@ -2291,6 +3431,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lessonCardsSection?.classList.add('hidden');
     individualLessonSection?.classList.add('hidden');
     importantTopicsSection?.classList.add('hidden');
+    examSystemView?.classList.add('hidden');
     courseDashboardSection?.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -2298,6 +3439,7 @@ document.addEventListener('DOMContentLoaded', () => {
   backToLessonCardsBtn?.addEventListener('click', () => {
     individualLessonSection?.classList.add('hidden');
     importantTopicsSection?.classList.add('hidden');
+    examSystemView?.classList.add('hidden');
     lessonCardsSection?.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -2308,6 +3450,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lessonCardsSection?.classList.add('hidden');
     individualLessonSection?.classList.add('hidden');
     importantTopicsSection?.classList.add('hidden');
+    examSystemView?.classList.add('hidden');
     lessonSection?.classList.add('hidden');
     heroSection?.classList.remove('hidden');
     coursesSection?.classList.remove('hidden');
@@ -2331,13 +3474,56 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   mockTestsCard?.addEventListener('click', () => {
-    alert('Mock Tests & Analytics feature is coming soon! Stay tuned for updates.');
+    showExamSystem();
   });
 
   backToDashboardFromTopicsBtn?.addEventListener('click', () => {
     importantTopicsSection?.classList.add('hidden');
+    examSystemView?.classList.add('hidden');
     courseDashboardSection?.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Exam system event listeners
+  backToDashboardFromExamBtn?.addEventListener('click', () => {
+    examSystemView?.classList.add('hidden');
+    courseDashboardSection?.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  startExamBtn?.addEventListener('click', () => {
+    startExam();
+  });
+
+  submitExamBtn?.addEventListener('click', () => {
+    if (confirm('Are you sure you want to submit the exam? You cannot change your answers after submission.')) {
+      submitExam();
+    }
+  });
+
+  prevQuestionBtn?.addEventListener('click', () => {
+    goToPreviousQuestion();
+  });
+
+  nextQuestionBtn?.addEventListener('click', () => {
+    goToNextQuestion();
+  });
+
+  retakeExamBtn?.addEventListener('click', () => {
+    retakeExam();
+  });
+
+  generateCertificateBtn?.addEventListener('click', () => {
+    generateCertificate();
+  });
+
+  downloadCertificateBtn?.addEventListener('click', () => {
+    downloadCertificate();
+  });
+
+  backToResultsBtn?.addEventListener('click', () => {
+    certificateDisplay?.classList.add('hidden');
+    examResults?.classList.remove('hidden');
   });
 
   downloadBtn?.addEventListener('click', () => {
