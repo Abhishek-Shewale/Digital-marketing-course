@@ -170,6 +170,11 @@ const studentName = document.getElementById('studentName');
 const detailedResults = document.getElementById('detailedResults');
 const certificateContent = document.getElementById('certificateContent');
 
+// Submit confirmation modal elements
+const submitConfirmModal = document.getElementById('submitConfirmModal');
+const cancelSubmitBtn = document.getElementById('cancelSubmitBtn');
+const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
+
 // Lesson cards elements
 const lessonCardsTitle = document.getElementById('lessonCardsTitle');
 const lessonCardsMeta = document.getElementById('lessonCardsMeta');
@@ -568,7 +573,8 @@ function displayQuestion() {
 
   // Update navigation buttons
   prevQuestionBtn.disabled = examState.currentQuestionIndex === 0;
-  nextQuestionBtn.disabled = examState.currentQuestionIndex === courseQuestions.length - 1;
+  // Keep next button enabled even on last question so it can submit
+  nextQuestionBtn.disabled = false;
 
   if (examState.currentQuestionIndex === 0) {
     prevQuestionBtn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -649,8 +655,13 @@ function goToNextQuestion() {
     examState.currentQuestionIndex++;
     displayQuestion();
   } else {
-    // Last question - submit exam
-    submitExam();
+    // Last question - open the same confirmation modal as header submit
+    if (submitConfirmModal) {
+      submitConfirmModal.classList.remove('hidden');
+    } else {
+      // Fallback: directly submit if modal missing
+      submitExam();
+    }
   }
 }
 
@@ -1551,10 +1562,20 @@ document.addEventListener('DOMContentLoaded', () => {
     startExam();
   });
 
+  // Open submit confirmation modal from header button
   submitExamBtn?.addEventListener('click', () => {
-    if (confirm('Are you sure you want to submit the exam? You cannot change your answers after submission.')) {
-      submitExam();
-    }
+    if (submitConfirmModal) submitConfirmModal.classList.remove('hidden');
+  });
+
+  // Modal: cancel -> close modal
+  cancelSubmitBtn?.addEventListener('click', () => {
+    submitConfirmModal?.classList.add('hidden');
+  });
+
+  // Modal: confirm -> submit exam
+  confirmSubmitBtn?.addEventListener('click', () => {
+    submitConfirmModal?.classList.add('hidden');
+    submitExam();
   });
 
   prevQuestionBtn?.addEventListener('click', () => {
